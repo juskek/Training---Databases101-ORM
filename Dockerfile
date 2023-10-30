@@ -1,11 +1,17 @@
-FROM python:3.6
+FROM python:3.9.6
+
+# Set environment variables
 ENV PYTHONUNBUFFERED 1
 
+# Set the working directory in the container
+WORKDIR /Databases101ORM
+
+# Install pipenv
 RUN pip install --upgrade pip
 
-COPY ./requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+# Install dependencies
+COPY requirements.txt /Databases101ORM/
+RUN pip install -r requirements.txt
 
-RUN mkdir /Databases101ORM
-WORKDIR /Databases101ORM
+
 COPY ./Databases101ORM /Databases101ORM
