@@ -7,10 +7,11 @@ while true; do
 
     build="Build docker image"
     run="Run docker container"
+    restore="Restore db from pgdump backup file"
     exit="Exit"
     
 
-    options=("$build" "$run" "$exit")
+    options=("$build" "$run" "$restore" "$exit")
 
     select_option "${options[@]}"
     result="${options[$?]}"
@@ -25,6 +26,11 @@ while true; do
             ;;
         "$run")
             docker-compose up -d
+            ;;
+        "$restore")
+            cd db-data/ || exit 1
+            pwd
+            docker exec -i training---databases101-orm-db-1 psql -U justin -d pokemon < ../restore/backup_dump.sql
             ;;
         "$exit")
             echo "Exiting..."
