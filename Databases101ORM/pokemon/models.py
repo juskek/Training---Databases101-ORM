@@ -77,8 +77,8 @@ class TrainerItems(models.Model):
 
 
 class TypeWeakness(models.Model):
-    type = models.OneToOneField(PokemonType, models.DO_NOTHING, primary_key=True)
-    weak_against = models.ForeignKey(PokemonType, models.DO_NOTHING)
+    type = models.OneToOneField(PokemonType, models.DO_NOTHING, primary_key=True, related_name='type_weaknesses')
+    weak_against = models.ForeignKey(PokemonType, models.DO_NOTHING, related_name='weaknesses_against')
 
     class Meta:
         managed = False
