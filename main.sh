@@ -8,10 +8,11 @@ while true; do
     build="Build docker image"
     run="Run docker container"
     restore="Restore db from pgdump backup file"
+    generate="Generate ORM types"
     exit="Exit"
     
 
-    options=("$build" "$run" "$restore" "$exit")
+    options=("$build" "$run" "$restore" "$generate" "$exit")
 
     select_option "${options[@]}"
     result="${options[$?]}"
@@ -29,8 +30,11 @@ while true; do
             ;;
         "$restore")
             cd db-data/ || exit 1
-            pwd
             docker exec -i training---databases101-orm-db-1 psql -U justin -d pokemon < ../restore/backup_dump.sql
+            ;;
+        "$generate")
+            cd db-data/ || exit 1
+            docker exec -i training---databases101-orm-web-1 python manage.py inspectdb > ../Databases101ORM/pokemon/models.py
             ;;
         "$exit")
             echo "Exiting..."
