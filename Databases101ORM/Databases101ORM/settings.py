@@ -30,9 +30,9 @@ ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
+        'NAME': 'pokemon',
+        'USER': 'justin',
+        'PASSWORD': '123',
         'HOST': 'db',
         'PORT': 5432,
     }
